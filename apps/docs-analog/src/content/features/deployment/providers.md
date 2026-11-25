@@ -532,6 +532,8 @@ If using Analog to pre-render static content, you can deploy a static site on Re
 
 Analog supports deploying server-side rendered apps on [Prisma Compute](https://www.prisma.io/compute) using the default build preset. Compute deploys apps that are declared with [Prisma Composer](https://www.prisma.io/docs/composer), which takes three small files in the root of your project.
 
+Composer requires Node.js 22.18 or newer on the 22 line, 24.11 or newer on the 24 line, or 26 or newer.
+
 1. Install the Composer packages and the Prisma CLI:
 
 ```bash
@@ -556,6 +558,8 @@ export default compute({
 });
 ```
 
+In an Nx workspace, the build output is in `dist/[your-project-name]/analog`, so set `dir` to that directory.
+
 3. Create a `module.ts` file that names the project:
 
 ```ts [module.ts]
@@ -567,7 +571,7 @@ export default module('my-analog-app', ({ provision }) => {
 });
 ```
 
-4. Create a `prisma.config.ts` file that sets the region for the project:
+4. Create a `prisma.config.ts` file that sets the region for the project. If your project already has a `prisma.config.ts` file, add the `composer` section to it and keep its other settings:
 
 ```ts [prisma.config.ts]
 import { defineConfig as composer } from '@prisma/composer/config';
